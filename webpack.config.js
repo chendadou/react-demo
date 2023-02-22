@@ -8,7 +8,9 @@ const isDevMode = process.env.NODE_ENV == 'development';
 
 module.exports = {
   mode: 'development',
-  entry: path.resolve(__dirname, 'src/index.js'),
+  entry: {
+    main: path.resolve(__dirname, 'src/index.tsx'),
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
@@ -23,8 +25,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?(js|jsx)$/,
-        exclude: /(node_modules|bower_components)/,
+        test: /\.m?(tsx|ts)$/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
         }
@@ -58,7 +60,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpg|jpeg|png|gif|svg|woff|woff2|otf|ttf)$/i,
+        test: /\.(jpg|jpeg|png|gif|bmp|svg|woff|woff2|otf|ttf)$/i,
         type: 'asset',
       },
     ]

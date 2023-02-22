@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "jsx": "react",
+  },
+  "include": ["src", "./assets.d.ts"]
+}
