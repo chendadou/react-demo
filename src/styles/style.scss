@@ -1,0 +1,15 @@
+$body-color: chocolate;
+
+$img-width: 100px;
+$img-height: 100px;
+
+body {
+  color: $body-color;
+  margin: auto;
+
+  .img {
+    width: $img-width;
+    height: $img-height;
+    border-radius: 5px;
+  }
+}

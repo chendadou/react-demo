@@ -12,6 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
+    assetModuleFilename: 'images/[hash][ext][query]',
     // publicPath: "/",
   },
   devServer: {
@@ -55,6 +56,10 @@ module.exports = {
           // 将 Sass 编译成 CSS
           'sass-loader',
         ],
+      },
+      {
+        test: /\.(jpg|jpeg|png|gif|svg|woff|woff2|otf|ttf)$/i,
+        type: 'asset',
       },
     ]
   },
