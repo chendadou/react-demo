@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import Page01 from './pages/page01/index';
 
 import './styles/style.css';
 import './styles/style.less';
@@ -13,6 +14,7 @@ const App: React.FC = () => {
     <div id='test' className='less-test'>
       <div className='font-40'>{title}</div>
       <img src={imgSrc} className='img' />
+      <Page01 msg="yeah" />
     </div>
   )
 }
