@@ -1,6 +1,7 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 import path from 'path';
 const dir = path.resolve(__dirname, 'src');
@@ -46,6 +47,16 @@ module.exports = {
                   '@babel/plugin-proposal-class-properties',
                   { loose: true }
                 ],
+
+                // silence these warning from babel
+                [
+                  '@babel/plugin-proposal-private-property-in-object',
+                  { loose: true }
+                ],
+                [
+                  '@babel/plugin-proposal-private-methods',
+                  { loose: true }
+                ],
               ]
             }
           },
@@ -89,6 +100,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: `${dir}/index.html`,
     }),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
     }),

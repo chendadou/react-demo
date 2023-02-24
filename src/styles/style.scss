@@ -1,15 +1,6 @@
-$body-color: chocolate;
-
-$img-width: 100px;
-$img-height: 100px;
+// $body-color: chocolate;
 
 body {
-  color: $body-color;
+  // color: $body-color;
   margin: auto;
-
-  .img {
-    width: $img-width;
-    height: $img-height;
-    border-radius: 5px;
-  }
 }
