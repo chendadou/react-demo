@@ -1,8 +1,11 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import Page01 from './pages/page01/index';
 
-import './styles/style.scss';
+import { createRoot } from 'react-dom/client';
+const container = document.getElementById('app');
+const root = createRoot(container!);    // createRoot(container!) if you use TypeScript
+
+import '@/styles/style.scss';
 
 const App: React.FC = () => {
   return (
@@ -12,4 +15,4 @@ const App: React.FC = () => {
   )
 }
 
-ReactDom.render(<App />, document.getElementById('app'));
+root.render(<App />);

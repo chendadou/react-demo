@@ -12,9 +12,9 @@ import {
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme } from 'antd';
 
-import imgSrc from '../../assets/images/icon01.png';
-import imgSrc2 from '../../assets/images/icon02.png';
-import '../../styles/style.less';
+import imgSrc from '@/assets/images/icon01.png';
+import imgSrc2 from '@/assets/images/icon02.png';
+import '@/styles/style.less';
 
 const { Header, Content, Footer, Sider } = Layout;
 
