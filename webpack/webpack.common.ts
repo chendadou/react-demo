@@ -46,31 +46,29 @@ const commonConfig: webpack.Configuration = {
         test: /\.css$/i,
         exclude: /node_modules/,
         use: [
-          isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
+          { loader: isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader },
+          { loader: 'css-loader', },
+          { loader: 'postcss-loader', },
         ],
       },
       {
         test: /\.less$/i,
         exclude: /node_modules/,
         use: [
-          // compiles Less to CSS
-          isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'less-loader',
+          { loader: isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader },
+          { loader: 'css-loader', },
+          { loader: 'postcss-loader', },
+          { loader: 'less-loader' },
         ],
       },
       {
         test: /\.s[ac]ss$/i,
         exclude: /node_modules/,
         use: [
-          // 将 JS 字符串生成为 style 节点
-          isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          // 将 CSS 转化成 CommonJS 模块
-          'css-loader',
-          // 将 Sass 编译成 CSS
-          'sass-loader',
+          { loader: isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader },
+          { loader: 'css-loader', },
+          { loader: 'postcss-loader', },
+          { loader: 'sass-loader' },
         ],
       },
 
