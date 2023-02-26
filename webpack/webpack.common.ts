@@ -16,33 +16,6 @@ const commonConfig: webpack.Configuration = {
   module: {
     rules: [
       {
-        test: /\.m?(tsx|ts)$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              babelrc: false,
-              presets: [
-                ['@babel/preset-env'],
-                ['@babel/preset-typescript'],
-                ['@babel/preset-react'],
-              ],
-              plugins: [
-                ['@babel/plugin-transform-runtime'],
-                ['@babel/plugin-proposal-decorators', { legacy: true },],
-                ['@babel/plugin-proposal-class-properties', { loose: true },],
-
-                // silence these warning from babel
-                ['@babel/plugin-proposal-private-property-in-object', { loose: true },],
-                ['@babel/plugin-proposal-private-methods', { loose: true },],
-                isDevMode && ['react-refresh/babel']
-              ]
-            }
-          },
-        ],
-      },
-      {
         test: /\.css$/i,
         exclude: /node_modules/,
         use: [
@@ -171,8 +144,12 @@ const commonConfig: webpack.Configuration = {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
     alias: {
       '@': path.resolve(__dirname, '../src'),
-    }
+    },
+    modules: [path.resolve(__dirname, '../node_modules')], // 查找第三方模块只在本项目的node_modules中查找
   },
+  cache: {
+    type: 'filesystem', // 使用文件缓存
+  }
 }
 
 export default commonConfig;

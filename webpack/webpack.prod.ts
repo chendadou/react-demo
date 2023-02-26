@@ -3,14 +3,44 @@ import { merge } from 'webpack-merge';
 import commonConfig from './webpack.common';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import path from 'path';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 const prodConfig: webpack.Configuration = merge(commonConfig, {
   mode: 'production',
+  module: {
+    rules: [
+      {
+        test: /\.m?(tsx|ts)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              babelrc: false,
+              presets: [
+                ['@babel/preset-env'],
+                ['@babel/preset-react'],
+                ['@babel/preset-typescript'],
+              ],
+              plugins: [
+                ['@babel/plugin-transform-runtime'],
+                ['@babel/plugin-proposal-decorators', { legacy: true },],
+                ['@babel/plugin-proposal-class-properties', { loose: true },],
+
+                // silence these warning from babel
+                ['@babel/plugin-proposal-private-property-in-object', { loose: true },],
+                ['@babel/plugin-proposal-private-methods', { loose: true },],
+              ]
+            }
+          },
+        ],
+      },
+    ]
+  },
   plugins: [
-    new BundleAnalyzerPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -28,6 +58,11 @@ const prodConfig: webpack.Configuration = merge(commonConfig, {
     }),
     new CleanWebpackPlugin(),
   ],
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin(), // 压缩css
+    ],
+  },
 });
 
 export default prodConfig;
