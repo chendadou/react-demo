@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   AppstoreOutlined,
   BarChartOutlined,
@@ -38,6 +38,11 @@ const Page01: React.FC = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const [count, setCount] = useState('');
+  const onChange = useCallback((e: any) => {
+    setCount(e.target.value);
+  }, [])
+
   return (
     <Layout hasSider>
       <Sider
@@ -58,6 +63,12 @@ const Page01: React.FC = () => {
         <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
           <div style={{ padding: 24, textAlign: 'center', background: colorBgContainer }}>
             <p>long content</p>
+            <h2>webpack5 + react18 + ts</h2>
+            <p>受控组件</p>
+            <input type="text" value={count} onChange={onChange} />
+            <br />
+            <p>非受控组件</p>
+            <input type="text" />
             <div className='img-box'>
               <img src={imgSrc} className='img-item' />
               <img src={imgSrc2} className='img-item' />

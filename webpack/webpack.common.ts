@@ -1,6 +1,5 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import webpack from 'webpack';
 import path from 'path';
 
@@ -12,7 +11,7 @@ const commonConfig: webpack.Configuration = {
   },
   output: {
     filename: 'static/js/[name].[chunkhash:8].js',
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
   },
   module: {
     rules: [
@@ -25,50 +24,93 @@ const commonConfig: webpack.Configuration = {
             options: {
               babelrc: false,
               presets: [
-                '@babel/preset-env',
-                '@babel/preset-typescript',
-                '@babel/preset-react'
+                ['@babel/preset-env'],
+                ['@babel/preset-typescript'],
+                ['@babel/preset-react'],
               ],
               plugins: [
-                '@babel/plugin-transform-runtime',
-                ['@babel/plugin-proposal-decorators', { legacy: true }],
-                ['@babel/plugin-proposal-class-properties', { loose: true }],
+                ['@babel/plugin-transform-runtime'],
+                ['@babel/plugin-proposal-decorators', { legacy: true },],
+                ['@babel/plugin-proposal-class-properties', { loose: true },],
 
                 // silence these warning from babel
-                ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
-                ['@babel/plugin-proposal-private-methods', { loose: true }],
+                ['@babel/plugin-proposal-private-property-in-object', { loose: true },],
+                ['@babel/plugin-proposal-private-methods', { loose: true },],
+                isDevMode && ['react-refresh/babel']
               ]
             }
           },
-        ]
+        ],
       },
       {
         test: /\.css$/i,
         exclude: /node_modules/,
         use: [
-          { loader: isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader },
+          { loader: isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader, },
           { loader: 'css-loader', },
-          { loader: 'postcss-loader', },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    "autoprefixer",
+                    {
+                      // Options
+                    },
+                  ],
+                ],
+              },
+            }
+          },
         ],
       },
       {
         test: /\.less$/i,
         exclude: /node_modules/,
         use: [
-          { loader: isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader },
+          { loader: isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader, },
           { loader: 'css-loader', },
-          { loader: 'postcss-loader', },
-          { loader: 'less-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    "autoprefixer",
+                    {
+                      // Options
+                    },
+                  ],
+                ],
+              },
+            }
+          },
+          { loader: 'less-loader', },
         ],
       },
       {
         test: /\.s[ac]ss$/i,
         exclude: /node_modules/,
         use: [
-          { loader: isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader },
+          { loader: isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader, },
           { loader: 'css-loader', },
-          { loader: 'postcss-loader', },
-          { loader: 'sass-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    "autoprefixer",
+                    {
+                      // Options
+                    },
+                  ],
+                ],
+              },
+            }
+          },
+          { loader: 'sass-loader', },
         ],
       },
 
@@ -116,13 +158,14 @@ const commonConfig: webpack.Configuration = {
           filename: 'static/media/[name].[contenthash:8][ext]', // 文件输出目录和命名
         },
       },
-    ]
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
+      inject: true,
+      favicon: 'public/favicon.ico',
     }),
-    new ForkTsCheckerWebpackPlugin(),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
