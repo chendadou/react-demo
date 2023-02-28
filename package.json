@@ -27,7 +27,6 @@
     "antd": "^5.2.2",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.2",
-    "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.3",

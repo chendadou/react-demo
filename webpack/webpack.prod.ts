@@ -5,7 +5,6 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import path from 'path';
 
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 const prodConfig: webpack.Configuration = merge(commonConfig, {
@@ -56,7 +55,6 @@ const prodConfig: webpack.Configuration = merge(commonConfig, {
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[contenthash:8].css'
     }),
-    new CleanWebpackPlugin(),
   ],
   optimization: {
     minimizer: [
