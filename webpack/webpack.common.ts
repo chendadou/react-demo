@@ -9,12 +9,6 @@ const commonConfig: webpack.Configuration = {
   entry: {
     main: path.resolve(__dirname, '../src/index.tsx'),
   },
-  output: {
-    filename: 'static/js/[name].[chunkhash:8].js',
-    path: path.resolve(__dirname, '../dist'),
-    clean: true,
-    publicPath: '/',
-  },
   module: {
     rules: [
       {
@@ -138,7 +132,7 @@ const commonConfig: webpack.Configuration = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
-      inject: true,
+      inject: true,   // 自动注入静态资源
       favicon: 'public/favicon.ico',
     }),
   ],
@@ -148,6 +142,7 @@ const commonConfig: webpack.Configuration = {
       '@': path.resolve(__dirname, '../src'),
     },
     modules: [path.resolve(__dirname, '../node_modules')], // 查找第三方模块只在本项目的node_modules中查找
+    symlinks: false,
   },
   cache: {
     type: 'filesystem', // 使用文件缓存

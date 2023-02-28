@@ -8,6 +8,7 @@ const root = createRoot(container!);    // createRoot(container!) if you use Typ
 import '@/styles/style.scss';
 
 const App: React.FC = () => {
+  console.log('111');
   return (
     <div id='main'>
       <Page01 />

@@ -7,20 +7,25 @@ import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 // in case you run into any typescript error when configuring `devServer`
 import 'webpack-dev-server';
 
-const isDevMode = process.env.NODE_ENV === 'development';
-
 const devConfig: webpack.Configuration = merge(commonConfig, {
   mode: 'development',
+  output: {
+    filename: 'app.js',
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: '/',
+  },
   devtool: 'eval-cheap-module-source-map',
   devServer: {
-    port: '9988',
+    port: '9898',
     compress: false,
     hot: true,
     // open: true,
-    // liveReload: true,
+    historyApiFallback: true,
+
+    // 托管静态资源 public 文件夹
     static: {
-      directory: path.join(__dirname, "../public"), //托管静态资源public文件夹
-    }
+      directory: path.join(__dirname, "../public"),
+    },
   },
   module: {
     rules: [
@@ -28,6 +33,7 @@ const devConfig: webpack.Configuration = merge(commonConfig, {
         test: /\.m?(tsx|ts)$/,
         exclude: /node_modules/,
         use: [
+          { loader: 'thread-loader', },
           {
             loader: 'babel-loader',
             options: {
@@ -45,6 +51,7 @@ const devConfig: webpack.Configuration = merge(commonConfig, {
                 // silence these warning from babel
                 ['@babel/plugin-proposal-private-property-in-object', { loose: true },],
                 ['@babel/plugin-proposal-private-methods', { loose: true },],
+
                 ['react-refresh/babel'],
               ]
             }
