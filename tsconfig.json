@@ -107,6 +107,7 @@
   },
   "include": [
     "src",
+    "webpack",
     "assets.d.ts",
     ".eslintrc.js",
   ]

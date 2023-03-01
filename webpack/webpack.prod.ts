@@ -69,7 +69,7 @@ const prodConfig: webpack.Configuration = merge(commonConfig, {
           from: path.resolve(__dirname, '../public'),
           to: path.resolve(__dirname, '../dist'),
           filter: source => {
-            return !source.includes('index.html')
+            return !source.includes('index.html');
           }
         }
       ],

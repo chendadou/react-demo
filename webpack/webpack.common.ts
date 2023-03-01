@@ -150,6 +150,6 @@ const commonConfig: webpack.Configuration = {
   cache: {
     type: 'filesystem', // 使用文件缓存
   }
-}
+};
 
 export default commonConfig;

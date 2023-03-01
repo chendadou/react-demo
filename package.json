@@ -9,7 +9,7 @@
     "start": "cross-env NODE_ENV=development webpack serve --color --progress --config ./webpack/webpack.dev.ts",
     "build": "cross-env NODE_ENV=production webpack --color --progress --config ./webpack/webpack.prod.ts",
     "analysis": "cross-env webpack --color --progress --config ./webpack/webpack.analysis.ts",
-    "lint": "eslint --ext .ts --ext .tsx src/"
+    "lint": "eslint --ext .ts --ext .tsx src/ webpack/ --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
