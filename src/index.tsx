@@ -13,7 +13,7 @@ const App: React.FC = () => {
     <div id='main'>
       <Page01 />
     </div>
-  )
-}
+  );
+};
 
 root.render(<App />);

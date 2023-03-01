@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, ChangeEvent } from 'react';
 import {
   AppstoreOutlined,
   BarChartOutlined,
@@ -39,9 +39,9 @@ const Page01: React.FC = () => {
   } = theme.useToken();
 
   const [count, setCount] = useState('');
-  const onChange = useCallback((e: any) => {
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setCount(e.target.value);
-  }, [])
+  }, []);
 
   return (
     <Layout hasSider>
