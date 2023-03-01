@@ -1,11 +1,11 @@
 import React from 'react';
-import Page01 from './pages/page01/index';
-
 import { createRoot } from 'react-dom/client';
+import Page01 from '@pages/page01';
+
+import '@styles/style.scss';
+
 const container = document.getElementById('app');
 const root = createRoot(container!);    // createRoot(container!) if you use TypeScript
-
-import '@/styles/style.scss';
 
 const App: React.FC = () => {
   console.log('111');
