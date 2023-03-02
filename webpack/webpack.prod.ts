@@ -8,7 +8,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
-import { PurgeCSSPlugin } from "purgecss-webpack-plugin";
+import { PurgeCSSPlugin } from 'purgecss-webpack-plugin';
 import glob from "glob";
 
 import CompressionPlugin from 'compression-webpack-plugin';
@@ -99,7 +99,7 @@ const prodConfig: webpack.Configuration = merge(commonConfig, {
   optimization: {
     minimizer: [
 
-      // 压缩css，该配置导致webpack内置插件 terser-webpack-plugin 压缩 js 失效
+      // 压缩css，该配置导致 webpack 内置插件 terser-webpack-plugin 压缩 js 失效
       new CssMinimizerPlugin(),
 
       // 压缩js，terser-webpack-plugin 自定义配置

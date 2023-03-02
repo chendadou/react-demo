@@ -144,8 +144,11 @@ const commonConfig: webpack.Configuration = {
       '@pages': path.resolve(__dirname, '../src/pages'),
       '@styles': path.resolve(__dirname, '../src/styles'),
     },
-    modules: [path.resolve(__dirname, '../node_modules')], // 查找第三方模块只在本项目的node_modules中查找
-    symlinks: false,
+
+    // 查找第三方模块只在本项目的node_modules中查找
+    modules: [path.resolve(__dirname, '../node_modules')],
+    
+    // symlinks: false,
   },
   cache: {
     type: 'filesystem', // 使用文件缓存

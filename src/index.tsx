@@ -1,19 +1,40 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import Page01 from '@pages/page01';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
 
-import '@styles/style.scss';
+import Root from './routes/root';
+import ErrorPage from './error-page';
+import Contact from './routes/contact';
+
+import './index.css';
 
 const container = document.getElementById('app');
-const root = createRoot(container!);    // createRoot(container!) if you use TypeScript
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'contacts/:contactId',
+        element: <Contact />,
+      }
+    ]
+  },
+]);
 
 const App: React.FC = () => {
-  console.log('111');
   return (
-    <div id='main'>
-      <Page01 />
-    </div>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
   );
 };
 
-root.render(<App />);
+if (container) {
+  createRoot(container).render(<App />);
+}
