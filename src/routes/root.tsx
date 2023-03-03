@@ -1,13 +1,20 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import {
+  Outlet,
+  NavLink,
+  useNavigation,
+  Form,
+} from 'react-router-dom';
 
 const Root: React.FC = () => {
+  const navigation = useNavigation();
+
   return (
     <>
       <div id="sidebar">
         <h1>React Router Contacts</h1>
         <div>
-          <form id="search-form" role="search">
+          <Form id="search-form" role="search">
             <input
               id="q"
               aria-label="Search contacts"
@@ -24,7 +31,7 @@ const Root: React.FC = () => {
               className="sr-only"
               aria-live="polite"
             ></div>
-          </form>
+          </Form>
           <form method="post">
             <button type="submit">New</button>
           </form>
@@ -32,15 +39,35 @@ const Root: React.FC = () => {
         <nav>
           <ul>
             <li>
-              <Link to={`/contacts/1`}>Your Name</Link>
+              <NavLink
+                to={`/contacts/1`}
+                className={({ isActive, isPending }) =>
+                  isActive ? "active" :
+                    isPending ? "pending" : ""
+                }
+              >
+                Your Name
+              </NavLink>
             </li>
+
             <li>
-              <Link to={`/contacts/2`}>Your Friend</Link>
+              <NavLink
+                to={`/contacts/2`}
+                className={({ isActive, isPending }) =>
+                  isActive ? "active" :
+                    isPending ? "pending" : ""
+                }
+              >
+                Your Friend
+              </NavLink>
             </li>
           </ul>
         </nav>
       </div>
-      <div id="detail">
+      <div
+        id="detail"
+        className={navigation.state === "loading" ? "loading" : ""}
+      >
         <Outlet />
       </div>
     </>
