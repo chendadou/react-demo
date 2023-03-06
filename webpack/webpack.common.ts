@@ -7,7 +7,7 @@ const isDevMode = process.env.NODE_ENV === 'development';
 
 const commonConfig: webpack.Configuration = {
   entry: {
-    main: path.resolve(__dirname, '../src/index.tsx'),
+    main: path.resolve(__dirname, '../src/main.tsx'),
   },
   module: {
     rules: [
@@ -143,6 +143,7 @@ const commonConfig: webpack.Configuration = {
       '@assets': path.resolve(__dirname, '../src/assets'),
       '@pages': path.resolve(__dirname, '../src/pages'),
       '@styles': path.resolve(__dirname, '../src/styles'),
+      '@routes': path.resolve(__dirname, '../src/routes'),
     },
 
     // 查找第三方模块只在本项目的node_modules中查找

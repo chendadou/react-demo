@@ -1,5 +1,15 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
-import { Form } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
+
+const {
+  getContact,
+} = require('@routes/contacts.js');
+
+export async function loader({ params }: any) {
+  const contact = await getContact(params.contactId);
+  return { contact };
+}
 
 interface Contact {
   first: string;
@@ -12,6 +22,7 @@ interface Contact {
 
 const Favorite: React.FC<{ contact: Contact }> = (props) => {
   const favorite = props.contact.favorite;
+
   return (
     <Form method="post">
       <button
@@ -30,14 +41,16 @@ const Favorite: React.FC<{ contact: Contact }> = (props) => {
 };
 
 const Contact: React.FC = () => {
-  const contact = {
-    first: "Your",
-    last: "Name",
-    avatar: "https://placekitten.com/g/200/200",
-    twitter: "your_handle",
-    notes: "Some notes",
-    favorite: true,
-  };
+  // const contact = {
+  //   first: "Your",
+  //   last: "Name",
+  //   avatar: "https://placekitten.com/g/200/200",
+  //   twitter: "your_handle",
+  //   notes: "Some notes",
+  //   favorite: true,
+  // };
+
+  const { contact }: any = useLoaderData();
 
   return (
     <div id="contact">

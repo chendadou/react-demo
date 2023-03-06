@@ -1,13 +1,43 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
 import {
   Outlet,
   NavLink,
   useNavigation,
   Form,
+  useLoaderData,
+  redirect,
+  useSubmit,
 } from 'react-router-dom';
 
+const {
+  getContacts,
+  createContact,
+} = require('@routes/contacts.js');
+
+export async function loader({ request }: any) {
+  const url = new URL(request.url);
+  const q = url.searchParams.get("q");
+  const contacts = await getContacts(q);
+  return { contacts, q };
+}
+
+export async function action() {
+  const contact = await createContact();
+  return redirect(`/contacts/${contact.id}/edit`);
+}
+
+interface ContactItem {
+  id: string;
+  first: string;
+  last: string;
+  favorite: string;
+}
+
 const Root: React.FC = () => {
+  const { contacts, q }: any = useLoaderData();
   const navigation = useNavigation();
+  const submit = useSubmit();
 
   return (
     <>
@@ -21,6 +51,10 @@ const Root: React.FC = () => {
               placeholder="Search"
               type="search"
               name="q"
+              defaultValue={q}
+              onChange={(event) => {
+                submit(event.currentTarget.form);
+              }}
             />
             <div
               id="search-spinner"
@@ -32,36 +66,44 @@ const Root: React.FC = () => {
               aria-live="polite"
             ></div>
           </Form>
-          <form method="post">
+          <Form method="post">
             <button type="submit">New</button>
-          </form>
+          </Form>
         </div>
         <nav>
-          <ul>
-            <li>
-              <NavLink
-                to={`/contacts/1`}
-                className={({ isActive, isPending }) =>
-                  isActive ? "active" :
-                    isPending ? "pending" : ""
-                }
-              >
-                Your Name
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to={`/contacts/2`}
-                className={({ isActive, isPending }) =>
-                  isActive ? "active" :
-                    isPending ? "pending" : ""
-                }
-              >
-                Your Friend
-              </NavLink>
-            </li>
-          </ul>
+          {contacts.length ? (
+            <ul>
+              {contacts.map((contact: ContactItem) => (
+                <li key={contact.id}>
+                  <NavLink
+                    to={`contacts/${contact.id}`}
+                    className={({ isActive, isPending }) =>
+                      isActive ? "active"
+                        : isPending ? "pending"
+                          : ""
+                    }
+                  >
+                    {
+                      contact.first || contact.last ?
+                        (
+                          <>
+                            {contact.first} {contact.last}
+                          </>
+                        ) :
+                        (
+                          <i>No Name</i>
+                        )
+                    }{" "}
+                    {contact.favorite && <span>★</span>}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>
+              <i>No contacts</i>
+            </p>
+          )}
         </nav>
       </div>
       <div

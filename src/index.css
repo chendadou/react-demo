@@ -103,7 +103,7 @@ form[action$="destroy"] button {
   border-width: 0;
 }
 
-#app {
+#root {
   display: flex;
   height: 100%;
   width: 100%;
