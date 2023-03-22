@@ -48,8 +48,6 @@
     "postcss": "^8.4.21",
     "postcss-loader": "^7.0.2",
     "purgecss-webpack-plugin": "^5.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-refresh": "^0.14.0",
     "react-router-dom": "^6.8.2",
     "sass": "^1.58.3",
@@ -64,5 +62,9 @@
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1",
     "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
