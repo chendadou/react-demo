@@ -1,6 +1,6 @@
-# about-react
+# react-demo
 
-> 从0到1搭建基于 Webpack5 + React18 + TypeScript4 的脚手架。
+> 从0到1搭建基于 Webpack5 + React18 + TypeScript4 的自用脚手架。
 
 ## 安装
 ``` bash
