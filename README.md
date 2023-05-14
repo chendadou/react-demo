@@ -1,6 +1,6 @@
 # react-demo
 
-> 从0到1搭建基于 Webpack5 + React18 + TypeScript4 的自用脚手架。
+> 从 0 到 1 搭建基于 Webpack5 + React18 + TypeScript4 的自用脚手架。
 
 ## 安装
 ``` bash
@@ -38,8 +38,9 @@ yarn install
 ├── src                       // 开发目录
 │   ├── assets                // 静态资源
 │   ├── pages                 // 页面文件
-│   ├── routes                // 路由文件（目前放的是 React Router 官方的 demo）
+│   ├── routes                // 路由文件
 │   ├── styles                // 样式文件
+│   ├── App.tsx               // 主组件文件
 │   └── main.tsx              // 项目入口文件
 ├── tsconfig.json             // ts配置
 └── webpack                   // webpack配置
