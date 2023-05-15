@@ -1,35 +1,49 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import Home from '@pages/home/Home';
-import Demo from '@pages/demo/Demo';
-import User from '@pages/user/User';
+
+// 路由懒加载
+const Demo = lazy(() => import('@pages/demo/Demo'));
+const User = lazy(() => import('@pages/user/User'));
 
 import {
-  UploadOutlined,
+  HomeOutlined,
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
 
+// key 和 icon 是为了配合 antd menu 使用的
 const routes = [
   {
+    key: '/',
     path: '/',
     element: <Home />,
-    icon: <UserOutlined />,
+    icon: <HomeOutlined />,
     label: 'Home',
-    children: [],
+    // children: [],
   },
   {
+    key: '/demo',
     path: '/demo',
-    element: <Demo />,
+    element: (
+      <Suspense fallback={<></>}>
+        <Demo />
+      </Suspense>
+    ),
     icon: <VideoCameraOutlined />,
     label: 'Demo',
-    children: [],
+    // children: [],
   },
   {
+    key: '/user',
     path: '/user',
-    element: <User />,
-    icon: <UploadOutlined />,
+    element: (
+      <Suspense fallback={<></>}>
+        <User />
+      </Suspense>
+    ),
+    icon: <UserOutlined />,
     label: 'User',
-    children: [],
+    // children: [],
   },
 ];
 
